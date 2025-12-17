@@ -1,6 +1,18 @@
 Stochastic Excel-Python Parallel Engine
 ======================================
 
+Quick Start
+-----------
+1. Edit `config.yaml` to point to your model and CSVs, adjust the worksheet and range names if your model layout differs (`worksheet_name`, `rng_assump`, `rng_policy`, `rng_out`), choose scenarios/policies, and configure provisioning settings.
+
+2. Run the engine:
+
+```bash
+python run.py
+```
+
+Provisioning is controlled entirely via `config.yaml`. Set `provision.enabled: true` to auto-provision worker models before the run starts.
+
 Overview
 --------
 This project runs parallel simulations by controlling Excel workbooks via COM (pywin32). It provisions per-worker Excel model copies for isolation, runs scenarios and policies, collects outputs to CSV, and can aggregate results.
@@ -42,18 +54,6 @@ This repository follows a simple separation of concerns:
   The worker code writes each policy row into the policy range before executing simulations.
 
 - `outputs/` — per-run result folders. Each run should use a new `output_dir` value in `config.yaml` to keep results isolated.
-
-Quick Start
------------
-1. Edit `config.yaml` to point to your model and CSVs, adjust the worksheet and range names if your model layout differs (`worksheet_name`, `rng_assump`, `rng_policy`, `rng_out`), choose scenarios/policies, and configure provisioning settings.
-
-2. Run the engine:
-
-```bash
-python run.py
-```
-
-Provisioning is controlled entirely via `config.yaml`. Set `provision.enabled: true` to auto-provision worker models before the run starts.
 
 Configuration (`config.yaml`)
 -----------------------------
