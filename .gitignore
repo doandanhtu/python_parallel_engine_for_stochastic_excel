@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Excel and CSV files (do not push binary models or CSV data)
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.csv
+
+# Model and output directories
+outputs/
+worker_models/
+
+# Avoid accidentally committing source models or data folders
+models/*.xls*
+parameters/*.csv
+policies/*.csv
+
+# Virtualenv / env
+venv/
+env/
+.env
+
+# IDE
+.vscode/
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db

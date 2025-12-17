@@ -1,0 +1,54 @@
+model_path: models/CU08_Pri_2025 12 12_v1.6.2.xlsb
+
+assumptions_csv: parameters/sen_test.csv
+policies_csv: policies/tested_policies_1.csv
+
+# Scenarios and Policies can be specified as:
+# - Specific list: [1, 2, 3, 5]
+# - Range: "5:10" or "5-10" (inclusive)
+# - Mixed list with ranges: [1, "5:10", 15]
+# - All: "all"
+scenarios: "all"
+policies: ["all"]
+# Example: policies: "all"  # Run all policies from CSV
+# Example: policies: "200:300"  # Run policies 200-300 inclusive
+# Example: policies: [1, "10:20", 50]  # Run 1, 10-20, and 50
+
+n_workers: 6
+n_sims: 100
+
+output_dir: outputs/test_6_100sims
+worker_models_dir: worker_models  # Directory for per-worker model copies (project root level, persistent across runs)
+
+# Logging and timeout settings
+log_level: INFO
+log_file: outputs/engine.log
+
+# Timeout (seconds) for queue operations
+queue_timeout: 10.0
+
+# Worker timeout (seconds) for detecting stuck workers
+# Set this based on n_sims: rough estimate is 1-2 seconds per simulation
+# For 1000 sims, use at least 1500-2000 seconds (25-33 minutes)
+# For 100 sims, use at least 200 seconds (3+ minutes)
+worker_timeout: 2000.0
+
+# Retry settings
+max_retries: 5
+retry_delay: 2.0
+retry_backoff: 1.5
+
+# Provisioning options for per-worker model copies
+# Worker models are stored in `worker_models_dir` (project root level, persistent).
+# If `n_workers` is omitted here, the top-level `n_workers` is used.
+provision:
+  enabled: true     # set true to provision before running
+  force: true       # set true to overwrite existing files
+  clean: true       # set true to remove all worker models before copying
+  # n_workers: 20    # optional override; defaults to top-level n_workers
+ 
+# Worksheet and ranges used in the model (centralized here so changes to model layout are easy)
+worksheet_name: Inputs
+rng_assump: I7:Z7
+rng_policy: I3:T3
+rng_out: U11:V11
