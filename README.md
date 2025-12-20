@@ -1,4 +1,4 @@
-Stochastic Excel-Python Parallel Engine v1.0.0
+Stochastic Excel-Python Parallel Engine v1.0
 ======================================
 
 Quick Start
